@@ -1,1 +1,1 @@
-export * from './cocoaNFT'
+export * from './timeCapsuleNFT'

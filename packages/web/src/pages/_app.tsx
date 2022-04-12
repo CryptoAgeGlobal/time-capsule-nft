@@ -1,10 +1,11 @@
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react'
-import { Web3Provider } from '@crypto-cocoa/web3-provider'
+import { Web3Provider, useWeb3 } from '@crypto-cocoa/web3-provider'
 import { CHAIN_ID } from 'src/constants/chainIds'
 import ERC721 from '@sample-package/contract/artifacts/contracts/CocoaNFT.sol/CocoaNFT.json'
 
+const ethereumMainnet = 1
 const theme = extendTheme({
   initialColorMode: 'dark',
   useSystemColorMode: false
@@ -23,7 +24,9 @@ function CocoaClub({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <Web3Provider chainId={ethereumMainnet} contractOptions={contractOptions}>
+        <Component {...pageProps} />
+      </Web3Provider>
     </ChakraProvider>
   )
 }
